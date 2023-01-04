@@ -1,0 +1,4 @@
+chip8
+*.dump.txt
+cmake-build-debug
+*.o

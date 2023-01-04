@@ -105,34 +105,50 @@ void Chip8::loadRom(const char *filename) {
     this->_program_size = this->loadFile(filename);
 }
 
+// read file as binary and dump hexadecimal values in a file
 void Chip8::dumpRom(const char *filename) {
-    std::cout << "Rom dump" << filename << std::endl;
+    std::cout << "Rom dump " << filename << std::endl;
     std::cout << "Memory dump " << filename << std::endl;
     this->_program_size = this->loadFile(filename);
+    std::string save_filename = std::string(filename) + ".dump.txt";
+    std::ofstream save_file;
+
+    save_file.open(save_filename.c_str());
 
     word i = START_PROGRAM_ADDRESS;
     while (i < START_PROGRAM_ADDRESS + this->_program_size) {
-        if (i % 16 == 0)
-            std::cout << "0x" << std::hex << std::setw(3) << std::setfill('0') << i << ' ';
+        if (i % 16 == 0) {
+            save_file << "0x" << std::hex << std::setw(3) << std::setfill('0') << i << ": ";
+            std::cout << "0x" << std::hex << std::setw(3) << std::setfill('0') << i << ": ";
+        }
         std::cout << std::setw(2) << std::hex << std::setfill('0') << std::right << (this->_memory[i] & 0xff);
-        if ( (i + 1) % 2 == 0 )
+        save_file << std::setw(2) << std::hex << std::setfill('0') << std::right << (this->_memory[i] & 0xff);
+        if ( (i + 1) % 2 == 0 ) {
             std::cout << ' ';
-        if ( (i + 1) % 4 == 0 )
+            save_file << ' ';
+        }
+        if ( (i + 1) % 4 == 0 ) {
             std::cout << ' ';
-        if ( (i + 1) % 8 == 0 )
+            save_file << ' ';
+        }
+        if ( (i + 1) % 8 == 0 ) {
             std::cout << ' ';
+            save_file << ' ';
+        }
         if ( (i + 1) % 16 == 0 ) {
             std::cout << std::endl;
+            save_file << std::endl;
         }
         i += 0x1;
     }
+    std::cout << "Saved to file " << save_filename << std::endl;
 }
 
+// loop through memory and write each instuction
 void Chip8::disassemblyRom(const char *filename) {
     std::cout << "Rom disassembly" << filename << std::endl;
     this->_program_size = this->loadFile(filename);
     std::cout << "$adress instruction mnemonic ;description " << filename << std::endl;
-    // loop through memory and write each instuction
     word i = START_PROGRAM_ADDRESS;
     while (i < START_PROGRAM_ADDRESS + this->_program_size) {
         word o;
