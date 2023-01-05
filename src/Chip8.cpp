@@ -110,9 +110,8 @@ void Chip8::dumpRom(const char *filename) {
     std::cout << "Rom dump " << filename << std::endl;
     std::cout << "Memory dump " << filename << std::endl;
     this->_program_size = this->loadFile(filename);
-    std::string save_filename = std::string(filename) + ".dump.txt";
+    std::string save_filename = std::string(filename)  + ".dump.txt";
     std::ofstream save_file;
-
     save_file.open(save_filename.c_str());
 
     word i = START_PROGRAM_ADDRESS;
@@ -141,6 +140,8 @@ void Chip8::dumpRom(const char *filename) {
         }
         i += 0x1;
     }
+    save_file.close();
+    std::cout << std::endl;
     std::cout << "Saved to file " << save_filename << std::endl;
 }
 
@@ -148,7 +149,12 @@ void Chip8::dumpRom(const char *filename) {
 void Chip8::disassemblyRom(const char *filename) {
     std::cout << "Rom disassembly" << filename << std::endl;
     this->_program_size = this->loadFile(filename);
+    std::string save_filename = std::string(filename)  + ".asm.txt";
+    std::ofstream save_file;
+    save_file.open(save_filename.c_str());
+
     std::cout << "$adress instruction mnemonic ;description " << filename << std::endl;
+    save_file << "$adress instruction mnemonic ;description " << filename << std::endl;
     word i = START_PROGRAM_ADDRESS;
     while (i < START_PROGRAM_ADDRESS + this->_program_size) {
         word o;
@@ -207,4 +213,7 @@ void Chip8::disassemblyRom(const char *filename) {
 
         i += 0x2;
     }
+    save_file.close();
+    std::cout << std::endl;
+    std::cout << "Saved to file " << save_filename << std::endl;
 }

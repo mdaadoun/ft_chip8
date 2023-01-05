@@ -1,19 +1,17 @@
 # A Chip8 Ecosystem
 
-
-
 ## steps:
 1. Build disassembler, assembler, octo compiler and debugger.
 2. Graphic device and IDE for play and coding chip8 games with octo.
-3. Compiler for an embedded raspberry pi pico interpreter.
-4. Add a terminal, a tiny basic interpreter and new chip101 instructions ?
-5. Document clearly all the project and build pdf project.
+3. Implement it to an embedded raspberry pi pico interpreter.
+4. Program some classic games to learn instructions and octo.
+5. Add a terminal, a tiny basic interpreter and new chip101 instructions ?
+6. Document clearly all the project and build pdf project.
 
 ## todo:
 * Remplacer array par des vector ?
-* Remplacer loop pour initialiser a 0 par des memset
-* Save dump rom to text file <filename>.dump
-* Save disassembly to text file <filename>.asm
+* Remplacer loop pour initialiser a 0 par des memset, solution c++
+* Save disassembly to text file <filename>.asm.txt
 
 ## references:
 * https://chip-8.github.io/
