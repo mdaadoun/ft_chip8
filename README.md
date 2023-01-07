@@ -9,6 +9,7 @@
 6. Document clearly all the project and build pdf project.
 
 ## todo:
+* trouver une solution pour afficher dans cout et ecrire dans le fichier en meme temps.
 * Remplacer array par des vector ?
 * Remplacer loop pour initialiser a 0 par des memset, solution c++
 * Save disassembly to text file <filename>.asm.txt

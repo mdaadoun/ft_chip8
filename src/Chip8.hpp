@@ -7,8 +7,8 @@
 #include <fstream>
 #include <cstring>
 
-typedef unsigned char   byte; // 2 nibbles, 8bit
-typedef unsigned short  word; // 2 bytes, 16bit
+typedef unsigned char   byte; // 2 nibbles, 1 byte, 8bit
+typedef unsigned short  word; // 4 nibbles, 2 bytes, 16bit
 
 #define MEMORY_SIZE 0xFFF
 #define START_PROGRAM_ADDRESS 0x200

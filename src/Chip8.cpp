@@ -153,7 +153,6 @@ void Chip8::disassemblyRom(const char *filename) {
     std::ofstream save_file;
     save_file.open(save_filename.c_str());
 
-    std::cout << "$adress instruction mnemonic ;description " << filename << std::endl;
     save_file << "$adress instruction mnemonic ;description " << filename << std::endl;
     word i = START_PROGRAM_ADDRESS;
     while (i < START_PROGRAM_ADDRESS + this->_program_size) {
@@ -163,36 +162,36 @@ void Chip8::disassemblyRom(const char *filename) {
         byte n2 = Chip8::getNibble(o, 2);
         byte n3 = Chip8::getNibble(o, 3);
         byte n4 = Chip8::getNibble(o, 4);
-        std::cout << "$" << std::hex << i << ' ';
-        std::cout << std::setw(4) << std::setfill('0') << +o << std::setw(2)  << ": ";
+        save_file << "$" << std::hex << i << ' ';
+        save_file << std::setw(4) << std::setfill('0') << +o << std::setw(2)  << ": ";
         // set color to distinguish type of chip8 opcodes (schip, xochip, xechip...) or errors/not implemented.
         switch (n1) {
             case (0x0):
                 switch (o) {
                     case 0x00e0: // 0x00E0 ;CLS, Clears the display.
-                        std::cout << "CLS ;clear the display." << std::endl;
+                        save_file << "CLS ;clear the display." << std::endl;
                         break;
                     case 0x00ee: // 0x00EE ;Returns from a subroutine.
-                        std::cout << "RET ;returns from a subroutine." << std::endl;
+                        save_file << "RET ;returns from a subroutine." << std::endl;
                         break;
                     default: // 0x0NNN ;RCA 1802/VIP instructions are not implemented
-                        std::cout << "SYS ;call legacy opcode." << std::endl;
+                        save_file << "SYS ;call legacy opcode." << std::endl;
                 }
                 break;
             case (0x1): // 0x1NNN; Jumps to address NNN.
-                std::cout << "JP " << std::hex << +n2 << +n3 << +n4;
-                std::cout << " ;jump to address $" << std::hex << +n2 << +n3 << +n4 << std::endl;
+                save_file << "JP " << std::hex << +n2 << +n3 << +n4;
+                save_file << " ;jump to address $" << std::hex << +n2 << +n3 << +n4 << std::endl;
                 // this->_program_counter = _opcode & 0xfff;
                 break;
             case(0x2): // 0x2NNN; Calls subroutine at NNN.
-                std::cout << "CALL " << std::hex << +n2 << +n3 << +n4;
-                std::cout << " ;calls subroutine at $" << std::hex << +n2 << +n3 << +n4 << std::endl;
+                save_file << "CALL " << std::hex << +n2 << +n3 << +n4;
+                save_file << " ;calls subroutine at $" << std::hex << +n2 << +n3 << +n4 << std::endl;
                 // save program_counter to stack
                 // this->_program_counter = _opcode & 0xfff;
                 break;
             case(0x3): // 0x3XNN; Skips the next instruction if VX equals NN.
-                std::cout << "SE " << std::hex << +n2 << "==" << +n3 << +n4;
-                std::cout << " ;Skips the next instruction if VX equals NN." << std::endl;
+                save_file << "SE " << std::hex << +n2 << "==" << +n3 << +n4;
+                save_file << " ;Skips the next instruction if VX (V" << +n2 << ") equals NN (" << +n3 << +n4 << ")." << std::endl;
                 // The interpreter compares register Vx to kk, and if they are equal, increments the program counter by 2.
                 break;
             case(0x4):
@@ -208,7 +207,7 @@ void Chip8::disassemblyRom(const char *filename) {
             case(0xe):
             case(0xf):
             default:
-                std::cout << "Opcode instruction not implemented." << std::endl;
+                save_file << "Opcode instruction not implemented." << std::endl;
         }
 
         i += 0x2;
