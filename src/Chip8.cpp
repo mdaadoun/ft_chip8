@@ -166,18 +166,18 @@ void Chip8::disassemblyRom(const char *filename) {
                         save_file << "SYS ;call legacy opcode." << std::endl;
                 }
                 break;
-            case (0x1): // 0x1NNN; Jumps to address NNN.
+            case (0x1): // 0x1NNN ;Jumps to address NNN.
                 save_file << "JP " << std::hex << +n2 << +n3 << +n4;
                 save_file << " ;jump to address $" << std::hex << +n2 << +n3 << +n4 << std::endl;
                 // this->_program_counter = _opcode & 0xfff;
                 break;
-            case(0x2): // 0x2NNN; Calls subroutine at NNN.
+            case(0x2): // 0x2NNN ;Calls subroutine at NNN.
                 save_file << "CALL " << std::hex << +n2 << +n3 << +n4;
                 save_file << " ;calls subroutine at $" << std::hex << +n2 << +n3 << +n4 << std::endl;
                 // save program_counter to stack
                 // this->_program_counter = _opcode & 0xfff;
                 break;
-            case(0x3): // 0x3XNN; Skips the next instruction if VX equals NN.
+            case(0x3): // 0x3XNN ;Skips the next instruction if VX equals NN.
                 save_file << "SE " << std::hex << +n2 << "==" << +n3 << +n4;
                 save_file << " ;Skips the next instruction if VX (V" << +n2 << ") equals NN (" << +n3 << +n4 << ")." << std::endl;
                 // The interpreter compares register Vx to kk, and if they are equal, increments the program counter by 2.
@@ -188,7 +188,10 @@ void Chip8::disassemblyRom(const char *filename) {
             case(0x7):
             case(0x8):
             case(0x9):
-            case(0xa):
+            case(0xa): // 0xaNNN ;The value of register I is set to nnn.
+                save_file << "LD I " << std::hex << +n2 << +n3 << +n4;
+                save_file << " ;register I set to " << std::hex << +n2 << +n3 << +n4 << std::endl;
+                break;
             case(0xb):
             case(0xc):
             case(0xd):
