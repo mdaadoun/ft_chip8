@@ -183,20 +183,43 @@ void Chip8::disassemblyRom(const char *filename) {
                 // The interpreter compares register Vx to kk, and if they are equal, increments the program counter by 2.
                 break;
             case(0x4):
+                save_file << "Opcode instruction not implemented." << std::endl;
+                break;
             case(0x5):
+                save_file << "Opcode instruction not implemented." << std::endl;
+                break;
             case(0x6):
+                save_file << "LD V" << std::hex << +n2 << "=" << +n3 << +n4;
+                save_file << " ;register V" << std::hex << +n2 <<  " set to " << +n3 << +n4 << std::endl;
+                break;
             case(0x7):
+                save_file << "Opcode instruction not implemented." << std::endl;
+                break;
             case(0x8):
+                save_file << "Opcode instruction not implemented." << std::endl;
+                break;
             case(0x9):
+                save_file << "Opcode instruction not implemented." << std::endl;
+                break;
             case(0xa): // 0xaNNN ;The value of register I is set to nnn.
-                save_file << "LD I " << std::hex << +n2 << +n3 << +n4;
+                save_file << "LD I=" << std::hex << +n2 << +n3 << +n4;
                 save_file << " ;register I set to " << std::hex << +n2 << +n3 << +n4 << std::endl;
                 break;
             case(0xb):
+                save_file << "Opcode instruction not implemented." << std::endl;
+                break;
             case(0xc):
+                save_file << "Opcode instruction not implemented." << std::endl;
+                break;
             case(0xd):
+                save_file << "Opcode instruction not implemented." << std::endl;
+                break;
             case(0xe):
+                save_file << "Opcode instruction not implemented." << std::endl;
+                break;
             case(0xf):
+                save_file << "Opcode instruction not implemented." << std::endl;
+                break;
             default:
                 save_file << "Opcode instruction not implemented." << std::endl;
         }

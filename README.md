@@ -16,6 +16,7 @@
 
 ## Main ref:
 * http://devernay.free.fr/hacks/chip8/C8TECH10.HTM
+
 ### Standard Chip-8 Instructions
 00E0 - CLS
 00EE - RET
