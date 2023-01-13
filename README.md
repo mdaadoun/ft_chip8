@@ -17,6 +17,22 @@
 ## Main ref:
 * http://devernay.free.fr/hacks/chip8/C8TECH10.HTM
 
+## references:
+* https://chip-8.github.io/
+* https://github.com/mattmikolay/chip-8/wiki/CHIP%E2%80%908-Instruction-Set
+* https://en.wikipedia.org/wiki/CHIP-8
+
+* https://github.com/search?l=C%2B%2B&q=chip8&type=Repositories
+
+* https://multigesture.net/articles/how-to-write-an-emulator-chip-8-interpreter/
+* http://www.emulator101.com/introduction-to-chip-8.html
+* https://github.com/mattmikolay/chip-8/wiki/Mastering-CHIP%E2%80%908
+* https://github.com/JohnEarnest/Octo
+* https://tobiasvl.github.io/blog/write-a-chip-8-emulator/
+* https://johnearnest.github.io/Octo/docs/BeginnersGuide.html
+* https://austinmorlan.com/posts/chip8_emulator/
+* https://tonisagrista.com/blog/2021/chip8-spec/
+
 ### Standard Chip-8 Instructions
 00E0 - CLS
 00EE - RET
@@ -64,19 +80,3 @@ Dxy0 - DRW Vx, Vy, 0
 Fx30 - LD HF, Vx
 Fx75 - LD R, Vx
 Fx85 - LD Vx, R
-
-## references:
-* https://chip-8.github.io/
-* https://github.com/mattmikolay/chip-8/wiki/CHIP%E2%80%908-Instruction-Set
-* https://en.wikipedia.org/wiki/CHIP-8
-
-* https://github.com/search?l=C%2B%2B&q=chip8&type=Repositories
-
-* https://multigesture.net/articles/how-to-write-an-emulator-chip-8-interpreter/
-* http://www.emulator101.com/introduction-to-chip-8.html
-* https://github.com/mattmikolay/chip-8/wiki/Mastering-CHIP%E2%80%908
-* https://github.com/JohnEarnest/Octo
-* https://tobiasvl.github.io/blog/write-a-chip-8-emulator/
-* https://johnearnest.github.io/Octo/docs/BeginnersGuide.html
-* https://austinmorlan.com/posts/chip8_emulator/
-* https://tonisagrista.com/blog/2021/chip8-spec/
