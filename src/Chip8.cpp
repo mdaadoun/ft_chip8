@@ -135,7 +135,7 @@ void Chip8::dumpRom(const char *filename) {
 
 // loop through memory and write each instuction
 void Chip8::disassemblyRom(const char *filename) {
-    std::cout << "Rom disassembly" << filename << std::endl;
+    std::cout << "Rom disassembly file " << filename << std::endl;
     this->_program_size = this->loadFile(filename);
     std::string save_filename = std::string(filename)  + ".asm.txt";
     std::ofstream save_file;
@@ -157,43 +157,45 @@ void Chip8::disassemblyRom(const char *filename) {
             case (0x0):
                 switch (o) {
                     case 0x00e0: // 0x00E0 ;CLS, Clears the display.
-                        save_file << "CLS ;clear the display." << std::endl;
+                        save_file << "CLS ;Clear the display." << std::endl;
                         break;
                     case 0x00ee: // 0x00EE ;Returns from a subroutine.
-                        save_file << "RET ;returns from a subroutine." << std::endl;
+                        save_file << "RET ;Returns from a subroutine." << std::endl;
                         break;
                     default: // 0x0NNN ;RCA 1802/VIP instructions are not implemented
-                        save_file << "SYS ;call legacy opcode." << std::endl;
+                        save_file << "SYS ;Call legacy opcode." << std::endl;
                 }
                 break;
             case (0x1): // 0x1NNN ;Jumps to address NNN.
                 save_file << "JP " << std::hex << +n2 << +n3 << +n4;
-                save_file << " ;jump to address $" << std::hex << +n2 << +n3 << +n4 << std::endl;
+                save_file << " ;Jump to address $" << std::hex << +n2 << +n3 << +n4 << std::endl;
                 // this->_program_counter = _opcode & 0xfff;
                 break;
             case(0x2): // 0x2NNN ;Calls subroutine at NNN.
                 save_file << "CALL " << std::hex << +n2 << +n3 << +n4;
-                save_file << " ;calls subroutine at $" << std::hex << +n2 << +n3 << +n4 << std::endl;
+                save_file << " ;Call subroutine at $" << std::hex << +n2 << +n3 << +n4 << std::endl;
                 // save program_counter to stack
                 // this->_program_counter = _opcode & 0xfff;
                 break;
             case(0x3): // 0x3XNN ;Skips the next instruction if VX equals NN.
                 save_file << "SE " << std::hex << +n2 << "==" << +n3 << +n4;
                 save_file << " ;Skips the next instruction if VX (V" << +n2 << ") equals NN (" << +n3 << +n4 << ")." << std::endl;
-                // The interpreter compares register Vx to kk, and if they are equal, increments the program counter by 2.
+                // The interpreter compares register VC to NN, and if they are equal, increments the program counter by 2.
                 break;
             case(0x4):
                 save_file << "Opcode instruction not implemented." << std::endl;
                 break;
             case(0x5):
                 save_file << "Opcode instruction not implemented." << std::endl;
-                break;
+                break; // 0x6XNN ;The interpreter puts the value NN into register VX.
             case(0x6):
                 save_file << "LD V" << std::hex << +n2 << "=" << +n3 << +n4;
-                save_file << " ;register V" << std::hex << +n2 <<  " set to " << +n3 << +n4 << std::endl;
+                save_file << " ;Set the register V" << std::hex << +n2 <<  " to " << +n3 << +n4 << std::endl;
                 break;
-            case(0x7):
-                save_file << "Opcode instruction not implemented." << std::endl;
+            case(0x7): // 0x7XNN ;Adds the value NN to the value of register VX, then stores the result in VX.
+                save_file << "ADD V" << std::hex << +n2 << "=V" << +n2 << "+" << +n3 << +n4;
+                save_file << " ;Adds the value " << std::hex << +n3 << +n4 <<  " to the register V" << +n2
+                << ", then stores the result in V" << +n2 << "." << std::endl;
                 break;
             case(0x8):
                 save_file << "Opcode instruction not implemented." << std::endl;
