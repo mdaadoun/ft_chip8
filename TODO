@@ -1,0 +1,8 @@
+
+## todo:
+* detect if filename path is valid
+* load file from any path
+* split path from string to get the filename
+* implement all opcode for guess program then try to run guess
+* Remplacer array par des vector ?
+* Remplacer loop pour initialiser a 0 par des memset, ou solution c++ pour vector

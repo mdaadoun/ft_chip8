@@ -137,11 +137,11 @@ void Chip8::dumpRom(const char *filename) {
 void Chip8::disassemblyRom(const char *filename) {
     std::cout << "Rom disassembly file " << filename << std::endl;
     this->_program_size = this->loadFile(filename);
-    std::string save_filename = std::string(filename)  + ".asm.txt";
+    std::string save_filename = "./assembly/" + std::string(filename)  + ".asm.txt";
     std::ofstream save_file;
     save_file.open(save_filename.c_str());
 
-    save_file << "$adress instruction mnemonic ;description " << filename << std::endl;
+    // Columns: $adress | instruction mnemonic | ;comment description
     word i = START_PROGRAM_ADDRESS;
     while (i < START_PROGRAM_ADDRESS + this->_program_size) {
         word o;
