@@ -1,5 +1,6 @@
 
 ## todo:
+* check if assembly directory exist, else create
 * detect if filename path is valid
 * load file from any path
 * split path from string to get the filename

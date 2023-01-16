@@ -137,7 +137,9 @@ void Chip8::dumpRom(const char *filename) {
 void Chip8::disassemblyRom(const char *filename) {
     std::cout << "Rom disassembly file " << filename << std::endl;
     this->_program_size = this->loadFile(filename);
-    std::string save_filename = "./assembly/" + std::string(filename)  + ".asm.txt";
+    std::string directory = "./assembly/";
+    check_existing_directory(directory);
+    std::string save_filename = directory + std::string(filename)  + ".asm.txt";
     std::ofstream save_file;
     save_file.open(save_filename.c_str());
 

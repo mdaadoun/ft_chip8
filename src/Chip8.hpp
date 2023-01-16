@@ -6,6 +6,7 @@
 #include <vector>
 #include <fstream>
 #include <cstring>
+#include "utils.hpp"
 
 typedef unsigned char   byte; // 2 nibbles, 1 byte, 8bit
 typedef unsigned short  word; // 4 nibbles, 2 bytes, 16bit
