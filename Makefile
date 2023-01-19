@@ -1,5 +1,5 @@
 NAME = chip8
-SRCS = main.cpp Chip8.cpp
+SRCS = main.cpp utils.cpp Chip8.cpp
 DIR = src
 OBJS = $(addprefix $(DIR)/,$(SRCS:%.cpp=%.o))
 CC = c++

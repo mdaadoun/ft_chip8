@@ -200,7 +200,29 @@ void Chip8::disassemblyRom(const char *filename) {
                 << ", then stores the result in V" << +n2 << "." << std::endl;
                 break;
             case(0x8):
-                save_file << "Opcode instruction not implemented." << std::endl;
+                switch (n4) {
+                    case(0x0): // 0x8XY0 ;Stores the value of register Vy in register Vx.
+                        save_file << "LD V" << std::hex << +n2 << "=V" << +n3;
+                        break;
+                    case(0x1):
+                        break;
+                    case(0x2):
+                        break;
+                    case(0x3):
+                        break;
+                    case(0x4):
+                        break;
+                    case(0x5):
+                        break;
+                    case(0x6):
+                        break;
+                    case(0x7):
+                        break;
+                    case(0xe):
+                        break;
+                    default:
+                        save_file << "Opcode instruction not implemented." << std::endl;
+                }
                 break;
             case(0x9):
                 save_file << "Opcode instruction not implemented." << std::endl;
