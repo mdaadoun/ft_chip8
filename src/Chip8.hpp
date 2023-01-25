@@ -28,6 +28,9 @@ public:
 //    void assemblyRom(char const* filename);
 
 private:
+    Chip8(Chip8 const &to_copy);
+    Chip8 const &operator=(Chip8 const& to_copy);
+
     long loadFile(char const* filename);
     long _program_size;
 

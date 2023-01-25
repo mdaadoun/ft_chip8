@@ -4,7 +4,7 @@ DIR = src
 OBJS = $(addprefix $(DIR)/,$(SRCS:%.cpp=%.o))
 CC = c++
 RM = rm -f
-FLAGS = -Wall -Wextra -Werror -Wpedantic -std=c++98 -I. -g
+FLAGS = -Wall -Wextra -Werror -Wpedantic -std=c++11 -I. -g
 
 R = \033[38;5;1m
 G = \033[38;5;2m
